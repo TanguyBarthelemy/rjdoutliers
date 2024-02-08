@@ -9,9 +9,6 @@
 \arguments{
 \item{m}{}
 }
-\value{
-
-}
 \description{
 Title
 }
