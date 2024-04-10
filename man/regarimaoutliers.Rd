@@ -41,9 +41,6 @@ regarimaoutliers(
 
 \item{cv}{Critical value}
 }
-\value{
-
-}
 \description{
 Title
 }

@@ -9,9 +9,6 @@ terror(ts, spec, nback = 1)
 \arguments{
 \item{nback}{}
 }
-\value{
-
-}
 \description{
 Title
 }

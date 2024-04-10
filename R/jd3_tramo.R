@@ -14,15 +14,15 @@ NULL
 #' @param ls Detection of level shifts
 #' @param so Detection of seasonal outliers
 #' @param tc Detection of transitory changes
-#' @param cv Critical value 
+#' @param cv Critical value
 #' @param ml Use of maximum likelihood (otherwise approximation by means of Hannan-Rissanen)
 #'
 #' @return
 #' @export
 #'
 #' @examples
-tramooutliers<-function(y, order=c(0L,1L,1L), seasonal=c(0L,1L,1L), mean=F,
-                      X=NULL, X.td=NULL, ao=T, ls=T, tc=F, so=F, cv=0, ml=F){
+tramooutliers<-function(y, order=c(0L,1L,1L), seasonal=c(0L,1L,1L), mean=FALSE,
+                      X=NULL, X.td=NULL, ao=TRUE, ls=TRUE, tc=FALSE, so=FALSE, cv=0, ml=FALSE){
   if (!is.ts(y)){
     stop("y must be a time series")
   }
@@ -31,17 +31,17 @@ tramooutliers<-function(y, order=c(0L,1L,1L), seasonal=c(0L,1L,1L), mean=F,
     td<-tradingdays(X.td, frequency(y), sy[1], sy[2], length(y))
     X<-cbind(X, td)
   }
-  
-  
-  jtramo<-.jcall("demetra/tramoseats/r/TramoOutliersDetection", "Ldemetra/tramoseats/r/TramoOutliersDetection$Results;", "process", ts_r2jd(y), 
+
+
+  jtramo<-.jcall("demetra/tramoseats/r/TramoOutliersDetection", "Ldemetra/tramoseats/r/TramoOutliersDetection$Results;", "process", ts_r2jd(y),
                as.integer(order), as.integer(seasonal), mean, matrix_r2jd(X),
                ao, ls, tc, so, cv, ml)
-  
+
   q<-.jcall(jtramo, "[B", "buffer")
   p<-RProtoBuf::read(outliers.RegArimaSolution, q)
-  
-  cov<-p2r_matrix(p$covariance) 
-  
+
+  cov<-p2r_matrix(p$covariance)
+
   return (structure(list(
                          outliers=p2r_outliers(p$outliers),
                          variables=p2r_x(p, cov),
@@ -102,7 +102,7 @@ forecast<-function(ts, spec="trfull", nf=-1){
   # TODO : check parameters
   jts<-ts_r2jd(ts)
   if (nf<0) nf<-frequency(ts)*(-nf)
-  
+
   if (is.character(spec)){
     jrslt<-.jcall("demetra/tramoseats/r/Tramo", "Ldemetra/math/matrices/MatrixType;", "forecast", jts, spec, as.integer(nf))
   }else{

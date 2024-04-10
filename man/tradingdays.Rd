@@ -17,9 +17,6 @@ tradingdays(clustering, freq, startyear, startperiod = 1, len, contrasts = T)
 
 \item{len}{}
 }
-\value{
-
-}
 \description{
 Title
 }

@@ -44,9 +44,6 @@ tramooutliers(
 
 \item{ml}{Use of maximum likelihood (otherwise approximation by means of Hannan-Rissanen)}
 }
-\value{
-
-}
 \description{
 Title
 }

@@ -26,9 +26,6 @@ sts(
 
 \item{seasonal}{}
 }
-\value{
-
-}
 \description{
 Structural time series
 }

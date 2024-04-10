@@ -4,12 +4,12 @@ NULL
 
 #' Structural time series
 #'
-#' @param y 
-#' @param level 
-#' @param slope 
-#' @param cycle 
-#' @param noise 
-#' @param seasonal 
+#' @param y
+#' @param level
+#' @param slope
+#' @param cycle
+#' @param noise
+#' @param seasonal
 #'
 #' @return
 #' @export
@@ -17,12 +17,12 @@ NULL
 #' @examples
 sts<-function(y, level=1, slope=1, cycle=-1, noise=1
               , seasonal=c("Trigonometric", "Dummy", "Crude", "HarrisonStevens", "Fixed", "Unused")){
-  
+
   if (!is.ts(y)){
     stop("y must be a time series")
   }
   seasonal<-match.arg(seasonal)
-  jsts<-.jcall("demetra/sts/r/StsEstimation", "Ldemetra/sts/r/StsEstimation$Results;", "process", ts_r2jd(y), 
+  jsts<-.jcall("demetra/sts/r/StsEstimation", "Ldemetra/sts/r/StsEstimation$Results;", "process", ts_r2jd(y),
               as.integer(level), as.integer(slope), as.integer(cycle), as.integer(noise), seasonal)
   l<-proc_numeric(jsts, "levelvar")
   s<-proc_numeric(jsts, "slopevar")
@@ -42,7 +42,7 @@ sts<-function(y, level=1, slope=1, cycle=-1, noise=1
     covariance=proc_matrix(jsts, "pcov")
   )
   likelihood<-proc_likelihood(jsts, "likelihood.")
-  
+
   return(structure(list(
     model=model,
     estimation=estimation,
@@ -53,7 +53,7 @@ sts<-function(y, level=1, slope=1, cycle=-1, noise=1
 
 #' Title
 #'
-#' @param m 
+#' @param m
 #'
 #' @return
 #' @export
@@ -74,7 +74,7 @@ print.JDSTS<-function(m){
   cat("LogLikelihood: ", format(round(s, 5), scientific = FALSE), "\n")
   s<-m$estimation$score
   cat("Scores: ", format(round(s, 5), scientific = FALSE), "\n")
-  
+
   #      ll<-proc_numeric(object@internal,"likelihood.ll")
   #      cat("Log likelihood = ", format(round(ll, 4), scientific = FALSE), "\n")
 }

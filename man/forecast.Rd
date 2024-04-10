@@ -9,9 +9,6 @@ forecast(ts, spec = "trfull", nf = -1)
 \arguments{
 \item{nf}{}
 }
-\value{
-
-}
 \description{
 Title
 }
