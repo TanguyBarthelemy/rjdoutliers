@@ -12,9 +12,9 @@ stsoutliers(
   seasonal = c("Trigonometric", "Dummy", "Crude", "HarrisonStevens", "Fixed", "Unused"),
   X = NULL,
   X.td = NULL,
-  ao = T,
-  ls = T,
-  so = F,
+  ao = TRUE,
+  ls = TRUE,
+  so = FALSE,
   cv = 0,
   tcv = 0,
   estimation.forward = c("Score", "Point", "Full"),
@@ -22,32 +22,6 @@ stsoutliers(
 )
 }
 \arguments{
-\item{y}{}
-
-\item{level}{}
-
-\item{slope}{}
-
-\item{noise}{}
-
-\item{seasonal}{}
-
-\item{X}{}
-
-\item{X.td}{}
-
-\item{ao}{}
-
-\item{ls}{}
-
-\item{so}{}
-
-\item{cv}{}
-
-\item{tcv}{}
-
-\item{estimation.forward}{}
-
 \item{estimation.backward}{}
 }
 \description{

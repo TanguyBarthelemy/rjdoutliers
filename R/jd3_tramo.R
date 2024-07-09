@@ -42,7 +42,7 @@ tramooutliers<-function(y, order=c(0L,1L,1L), seasonal=c(0L,1L,1L), mean=FALSE,
 
   cov<-p2r_matrix(p$covariance)
 
-  return (structure(list(
+  return(structure(list(
                          outliers=p2r_outliers(p$outliers),
                          variables=p2r_x(p, cov),
                          initialarima=p$arima_initial,
@@ -72,7 +72,7 @@ terror<-function(ts, spec, nback=1){
   jts<-ts_r2jd(ts)
   if (is.character(spec)){
     jrslt<-.jcall("demetra/tramoseats/r/Terror", "Ldemetra/math/matrices/MatrixType;", "process", jts, spec, as.integer(nback))
-  }else{
+  } else {
     jspec<-r2jd_spec_tramo(spec)
     if (is.null(context)){
       jcontext<-.jnull("demetra/util/r/Dictionary")
@@ -80,11 +80,11 @@ terror<-function(ts, spec, nback=1){
     jrslt<-.jcall("demetra/tramoseats/r/Terror", "Ldemetra/math/matrices/MatrixType;", "process", jts, jspec, jcontext, as.integer(nback))
   }
   if (is.jnull(jrslt)){
-    return (NULL)
-  }else{
+    return(NULL)
+  } else {
     rslt<-matrix_jd2r(jrslt)
     colnames(rslt)<-terror_names
-    return (rslt)
+    return(rslt)
   }
 }
 
@@ -105,7 +105,7 @@ forecast<-function(ts, spec="trfull", nf=-1){
 
   if (is.character(spec)){
     jrslt<-.jcall("demetra/tramoseats/r/Tramo", "Ldemetra/math/matrices/MatrixType;", "forecast", jts, spec, as.integer(nf))
-  }else{
+  } else {
     jspec<-r2jd_spec_tramo(spec)
     if (is.null(context)){
       jcontext<-.jnull("demetra/util/r/Dictionary")
@@ -113,10 +113,10 @@ forecast<-function(ts, spec="trfull", nf=-1){
     jrslt<-.jcall("demetra/tramoseats/r/Tramo", "Ldemetra/math/matrices/MatrixType;", "forecast", jts, jspec, jcontext, as.integer(nf))
   }
   if (is.jnull(jrslt)){
-    return (NULL)
-  }else{
+    return(NULL)
+  } else {
     rslt<-matrix_jd2r(jrslt)
     colnames(rslt)<-forecast_names
-    return (rslt)
+    return(rslt)
   }
 }

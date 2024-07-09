@@ -14,16 +14,6 @@ sts(
 )
 }
 \arguments{
-\item{y}{}
-
-\item{level}{}
-
-\item{slope}{}
-
-\item{cycle}{}
-
-\item{noise}{}
-
 \item{seasonal}{}
 }
 \description{

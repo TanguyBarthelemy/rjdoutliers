@@ -6,7 +6,7 @@ proc_numeric<-function(rslt, name){
   if (!is.jnull(s))
     .jcall(s, "D", "doubleValue")
   else
-    return (NaN)
+    return(NaN)
 }
 
 proc_vector<-function(rslt, name){
@@ -33,11 +33,11 @@ proc_bool<-function(rslt, name){
 proc_ts<-function(rslt, name){
   s<-.jcall(rslt, "Ljava/lang/Object;", "getData", name)
   if (is.jnull(s))
-    return (NULL)
+    return(NULL)
   if (.jinstanceof(s, "demetra/timeseries/TsData"))
     return(ts_jd2r(.jcast(s,"demetra/timeseries/TsData")))
   else
-    return (NULL)
+    return(NULL)
 }
 
 proc_str<-function(rslt, name){
@@ -71,7 +71,7 @@ proc_parameter<-function(rslt, name){
   if (is.jnull(s))
     return(NULL)
   val<-.jcall(s, "D", "getValue")
-  return (val)
+  return(val)
 }
 
 proc_parameters<-function(rslt, name){
@@ -91,22 +91,22 @@ proc_matrix<-function(rslt, name){
   s<-.jcall(rslt, "Ljava/lang/Object;", "getData", name)
   if (is.jnull(s))
     return(NULL)
-  return (matrix_jd2r(s))
+  return(matrix_jd2r(s))
 }
 
 proc_data<-function(rslt, name){
   s<-.jcall(rslt, "Ljava/lang/Object;", "getData", name)
   if (is.jnull(s))
-    return (NULL)
+    return(NULL)
   if (.jinstanceof(s, "demetra/timeseries/TsData"))
     return(ts_jd2r(.jcast(s,"demetra/timeseries/TsData")))
   else if (.jinstanceof(s, "java/lang/Number"))
-    return (.jcall(s, "D", "doubleValue"))
+    return(.jcall(s, "D", "doubleValue"))
   else if (.jinstanceof(s, "demetra/math/matrices/MatrixType"))
     return(matrix_jd2r(.jcast(s,"demetra/math/matrices/MatrixType")))
   else if (.jinstanceof(s, "demetra/data/Parameter")){
     val<-.jcall(s, "D", "getValue")
-     return (c(val))
+     return(c(val))
   }
   else if (.jinstanceof(s, "[Ldemetra/data/Parameter;")){
     p<-.jcastToArray(s)
@@ -115,12 +115,12 @@ proc_data<-function(rslt, name){
     for (i in 1:len){
       all[i]<-.jcall(p[[i]], "D", "getValue")
     }
-    return (all)
+    return(all)
   }
   else if (.jcall(.jcall(s, "Ljava/lang/Class;", "getClass"), "Z", "isArray"))
-    return (.jevalArray(s, silent=TRUE))
+    return(.jevalArray(s, silent=TRUE))
   else
-    return (.jcall(s, "S", "toString"))
+    return(.jcall(s, "S", "toString"))
 }
 
 proc_dictionary<-function(name){
@@ -134,11 +134,11 @@ proc_dictionary<-function(name){
   for (i in 1:size){
     keys[i] <- .jcall(.jcall(jiter, "Ljava/lang/Object;", "next"), "Ljava/lang/String;", "toString")
   }
-  return (keys)
+  return(keys)
 }
 
 proc_likelihood<-function(jrslt, prefix){
-  return (list(
+  return(list(
     ll=proc_numeric(jrslt, paste(prefix,"ll", sep="")),
     ssq=proc_numeric(jrslt, paste(prefix,"ssqerr", sep="")),
     nobs=proc_int(jrslt, paste(prefix,"nobs", sep="")),

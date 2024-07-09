@@ -37,5 +37,5 @@ seasonalbreaks<-function(y, level=1, slope=1, noise=1, seasonal=c("HarrisonSteve
   so<-.jcall("demetra/sts/r/StsOutliersDetection", "[D", "seasonalBreaks", ts_r2jd(y),
                as.integer(level), as.integer(slope), as.integer(noise), seasonal, matrix_r2jd(X))
 
-  return (ts(so, frequency = frequency(y), start=start(y)))
+  return(ts(so, frequency = frequency(y), start=start(y)))
 }

@@ -4,17 +4,16 @@
 \alias{tradingdays}
 \title{Title}
 \usage{
-tradingdays(clustering, freq, startyear, startperiod = 1, len, contrasts = T)
+tradingdays(
+  clustering,
+  freq,
+  startyear,
+  startperiod = 1,
+  len,
+  contrasts = TRUE
+)
 }
 \arguments{
-\item{clustering}{}
-
-\item{freq}{}
-
-\item{startyear}{}
-
-\item{startperiod}{}
-
 \item{len}{}
 }
 \description{

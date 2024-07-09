@@ -52,7 +52,7 @@ stsoutliers<-function(y, level=1, slope=1, noise=1, seasonal=c("Trigonometric", 
 
   cov<-p2r_matrix(p$covariance)
 
-  return (structure(list(
+  return(structure(list(
     outliers=p2r_outliers(p$outliers),
     variables=p2r_x(p, cov),
     initialbsm=p$bsm_initial,

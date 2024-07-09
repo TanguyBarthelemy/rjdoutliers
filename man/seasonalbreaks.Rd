@@ -15,20 +15,14 @@ seasonalbreaks(
 )
 }
 \arguments{
-\item{y}{}
-
 \item{level}{-1 = no level, 0 = fixed level, 1 = stochastic level}
-
-\item{slope}{}
-
-\item{noise}{}
 
 \item{seasonal}{Seasonal model}
 
 \item{X}{Regression variables (same length as y) or NULL}
 
-\item{X.td}{Specification for trading days clustering. 
-Contains the group id for Mondays... Sundays 
+\item{X.td}{Specification for trading days clustering.
+Contains the group id for Mondays... Sundays
 (for instance (1,1,1,1,1,0,0) for week days or (1,1,1,1,1,2,0) for week/Saturdays/Sundays variables).
 Contrasts are used. Can be NULL}
 }
