@@ -94,34 +94,33 @@ proc_matrix<-function(rslt, name){
   return(matrix_jd2r(s))
 }
 
-proc_data<-function(rslt, name){
-  s<-.jcall(rslt, "Ljava/lang/Object;", "getData", name)
-  if (is.jnull(s))
-    return(NULL)
-  if (.jinstanceof(s, "demetra/timeseries/TsData"))
-    return(ts_jd2r(.jcast(s,"demetra/timeseries/TsData")))
-  else if (.jinstanceof(s, "java/lang/Number")) {
-      return(.jcall(s, "D", "doubleValue"))
-  } else if (.jinstanceof(s, "demetra/math/matrices/MatrixType")) {
-      return(matrix_jd2r(.jcast(s,"demetra/math/matrices/MatrixType")))
-  }
-  else if (.jinstanceof(s, "demetra/data/Parameter")){
-    val<-.jcall(s, "D", "getValue")
-     return(c(val))
-  }
-  else if (.jinstanceof(s, "[Ldemetra/data/Parameter;")){
-    p<-.jcastToArray(s)
-    len<-length(p)
-    all<-array(0, dim=c(len))
-    for (i in 1:len){
-      all[i]<-.jcall(p[[i]], "D", "getValue")
+proc_data<-function(rslt, name) {
+    s<-.jcall(rslt, "Ljava/lang/Object;", "getData", name)
+    if (is.jnull(s)) {
+        return(NULL)
     }
-    return(all)
-  }
-  else if (.jcall(.jcall(s, "Ljava/lang/Class;", "getClass"), "Z", "isArray"))
-    return(.jevalArray(s, silent=TRUE))
-  else
-    return(.jcall(s, "S", "toString"))
+    if (.jinstanceof(s, "demetra/timeseries/TsData")) {
+        return(ts_jd2r(.jcast(s,"demetra/timeseries/TsData")))
+    } else if (.jinstanceof(s, "java/lang/Number")) {
+        return(.jcall(s, "D", "doubleValue"))
+    } else if (.jinstanceof(s, "demetra/math/matrices/MatrixType")) {
+        return(matrix_jd2r(.jcast(s,"demetra/math/matrices/MatrixType")))
+    } else if (.jinstanceof(s, "demetra/data/Parameter")) {
+        val<-.jcall(s, "D", "getValue")
+        return(c(val))
+    } else if (.jinstanceof(s, "[Ldemetra/data/Parameter;")) {
+        p<-.jcastToArray(s)
+        len<-length(p)
+        all<-array(0, dim=c(len))
+        for (i in 1:len){
+            all[i]<-.jcall(p[[i]], "D", "getValue")
+        }
+        return(all)
+    } else if (.jcall(.jcall(s, "Ljava/lang/Class;", "getClass"), "Z", "isArray")) {
+        return(.jevalArray(s, silent=TRUE))
+    } else {
+        return(.jcall(s, "S", "toString"))
+    }
 }
 
 proc_dictionary<-function(name){

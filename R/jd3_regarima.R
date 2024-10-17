@@ -21,11 +21,11 @@ NULL
 #'
 #' @examples
 regarimaoutliers<-function(y, order=c(0L,1L,1L), seasonal=c(0L,1L,1L), mean=FALSE,
-                        X=NULL, X.td=NULL, ao=TRUE, ls=TRUE, tc=FALSE, so=FALSE, cv=0){
-  if (!is.ts(y)){
+                        X=NULL, X.td=NULL, ao=TRUE, ls=TRUE, tc=FALSE, so=FALSE, cv=0) {
+  if (!is.ts(y)) {
     stop("y must be a time series")
   }
-  if (! is.null(X.td)){
+  if (! is.null(X.td)) {
     sy<-start(y)
     td<-tradingdays(X.td, frequency(y), sy[1], sy[2], length(y))
     X<-cbind(X, td)
