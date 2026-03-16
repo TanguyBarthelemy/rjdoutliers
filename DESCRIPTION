@@ -1,31 +1,37 @@
 Package: rjdoutliers
 Type: Package
 Title: Outliers detection with JD+ 
-Version: 0.3.0
-Authors@R: as.person(c(
-    "Jean Palate <jean.palate@nbb.be> [aut,cre]"
-      ))
-Description: Time series outliers detection
+Version: 1.0.0
+Authors@R: c(
+  person("Jean", "Palate", role = c("aut", "cre"),
+                email = "palatejean@gmail.com"))
+Description: R Interface to 'JDemetra+ 3.x' (<https://github.com/jdemetra>) time series analysis software. It provides functions for seasonal adjustment of high-frequency data displaying multiple, non integer periodicities. Pre-adjustment with extended airline model and Arima Model Based decomposition.
 Depends:
-    R (>= 3.1.1)
+  R (>= 4.1.0)
 Imports:
-    rJava (>= 0.9-8),
-   methods
-License: EUPL
+  rJava (>= 1.0-6),
+  RProtoBuf (>= 0.4.17),
+  rjd3toolkit (>= 3.5.1),
+  rjd3sts (>= 2.3.0.9000),
+  checkmate,
+  methods
+Remotes:
+    github::rjdverse/rjd3toolkit,
+    github::rjdverse/rjd3sts
+SystemRequirements: Java (>= 17)
+License: file LICENSE
 LazyData: TRUE
-Collate:
-    'jd3_ts.R'
-    'zzz.R'
-    'jd3_rslts.R'
-    'jd3_regarima.R'
-    'jd3_seasonalbreaks.R'
-    'jd3_sts.R'
-    'util.R'
-    'jd3_stsoutliers.R'
-    'jd3_tramo.R'
 Suggests:
     knitr,
     rmarkdown
+RoxygenNote: 7.3.2
 VignetteBuilder: knitr
+<<<<<<< HEAD
 RoxygenNote: 7.3.1
+=======
+>>>>>>> 43a4da6ddda3ab7f7e6d38d569828647e86f9897
 Encoding: UTF-8
+Collate: 
+    'utils.R'
+    'outliers.R'
+    'zzz.R'
