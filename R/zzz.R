@@ -8,7 +8,7 @@ NULL
 
   # TODO : devtools will look only in RJDemetra3\java for JAR files so copied them there too
   result <- .jpackage(pkgname, lib.loc=libname)
-  if (!result) stop("Loading java packages failed")
+  if (!result) stop("Loading Java packages failed")
 
   # what's your java  version?  Need > 1.5.0.
   jversion <- .jcall('java.lang.System','S','getProperty','java.version')
@@ -25,7 +25,7 @@ NULL
   if (! requireNamespace("rjd3sts", quietly = T)) stop("Loading rjd3 libraries failed")
 
   result <- rJava::.jpackage(pkgname, lib.loc=libname)
-  if (!result) stop("Loading java packages failed")
+  if (!result) stop("Loading Java packages failed")
 
   # reload extractors
   rjd3toolkit::reload_dictionaries()
